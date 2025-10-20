@@ -12,5 +12,5 @@ jobs:
     uses: ballerina-platform/ballerina-library/.github/workflows/release-package-connector-template.yml@main
     secrets: inherit
     with:
-      package-name: openai.chat
+      package-name: ai.azure.index
       package-org: ballerinax

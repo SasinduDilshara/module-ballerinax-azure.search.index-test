@@ -2,20 +2,20 @@
 
 ## Prerequisites
 
-You need an API token from OpenAI.
+You need an API key from Azure AI Search service and the service URL.
 
-To obtain this, refer to the [Ballerina OpenAI Chat Connector](https://github.com/ballerina-platform/module-ballerinax-openai.chat/blob/main/ballerina/Module.md).
+To obtain these, refer to the [Ballerina Azure AI Index Connector](https://github.com/ballerina-platform/module-ballerinax-ai.azure.index/blob/main/ballerina/Module.md).
 
 ## Test Environments
 
-There are two test environments for running the `openai.chat` connector tests. The default environment is a mock server for the OpenAI API. The other environment is the actual OpenAI API.
+There are two test environments for running the `ai.azure.index` connector tests. The default environment is a mock server for the Azure AI Search API. The other environment is the actual Azure AI Search API.
 
 You can run the tests in either of these environments, and each has its own compatible set of tests.
 
-| Test Groups | Environment                                       |
-|-------------|---------------------------------------------------|
-| mock_tests  | Mock server for OpenAI API (Default Environment)  |
-| live_tests  | OpenAI API                                        |
+| Test Groups | Environment                                              |
+|-------------|----------------------------------------------------------|
+| mock_tests  | Mock server for Azure AI Search API (Default Environment) |
+| live_tests  | Azure AI Search API                                       |
 
 ## Running Tests in the Mock Server
 
@@ -53,7 +53,7 @@ Then, run the following command to execute the tests:
 ./gradlew clean test
 ```
 
-## Running Tests Against the OpenAI Live API
+## Running Tests Against the Azure AI Search Live API
 
 ### Using a `Config.toml` File
 
@@ -61,7 +61,8 @@ Create a `Config.toml` file in the `tests` directory and add your authentication
 
 ```toml
 isLiveServer = true
-token = "<your-openAI-api-token>"
+serviceUrl = "<your-azure-search-service-url>"
+apiKey = "<your-azure-search-api-key>"
 ```
 
 ### Using Environment Variables
@@ -72,18 +73,20 @@ For Linux or macOS:
 
 ```bash
 export IS_LIVE_SERVER=true
-export OPENAI_TOKEN="<your-openAI-api-token>"
+export AZURE_SEARCH_SERVICE_URL="<your-azure-search-service-url>"
+export AZURE_SEARCH_API_KEY="<your-azure-search-api-key>"
 ```
 
 For Windows:
 
 ```bash
 setx IS_LIVE_SERVER true
-setx OPENAI_TOKEN <your-openAI-api-token>
+setx AZURE_SEARCH_SERVICE_URL <your-azure-search-service-url>
+setx AZURE_SEARCH_API_KEY <your-azure-search-api-key>
 ```
 
 Then, run the following command to execute the tests:
 
 ```bash
 ./gradlew clean test
-``` -->
+```

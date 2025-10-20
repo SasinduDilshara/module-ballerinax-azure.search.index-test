@@ -1,6 +1,6 @@
 [package]
 org = "wso2"
-name = "cli_assistant"
+name = "document_search"
 version = "0.1.0"
 distribution = "2201.9.3"
 

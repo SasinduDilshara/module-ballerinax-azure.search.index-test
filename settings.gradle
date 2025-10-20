@@ -27,11 +27,11 @@ plugins {
     id "com.gradle.enterprise" version "3.2"
 }
 
-rootProject.name = 'module-ballerinax-openai.chat'
+rootProject.name = 'module-ballerinax-ai.azure.index'
 
-include ':openai.chat-ballerina'
+include ':ai.azure.index-ballerina'
 
-project(':openai.chat-ballerina').projectDir = file("ballerina")
+project(':ai.azure.index-ballerina').projectDir = file("ballerina")
 
 gradleEnterprise {
     buildScan {

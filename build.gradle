@@ -58,7 +58,7 @@ allprojects {
 def moduleVersion = project.version.replace("-SNAPSHOT", "")
 
 task build {
-    dependsOn(':openai.chat-ballerina:build')
+    dependsOn(':ai.azure.index-ballerina:build')
 }
 
 release {

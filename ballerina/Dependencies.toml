@@ -315,8 +315,8 @@ modules = [
 
 [[package]]
 org = "ballerinax"
-name = "openai.chat"
-version = "4.0.0"
+name = "ai.azure.index"
+version = "1.0.0"
 dependencies = [
 	{org = "ballerina", name = "constraint"},
 	{org = "ballerina", name = "data.jsondata"},
@@ -325,6 +325,6 @@ dependencies = [
 	{org = "ballerinai", name = "observe"}
 ]
 modules = [
-	{org = "ballerinax", packageName = "openai.chat", moduleName = "openai.chat"}
+	{org = "ballerinax", packageName = "ai.azure.index", moduleName = "ai.azure.index"}
 ]
 
