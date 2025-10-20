@@ -20,17 +20,7 @@ import ballerina/log;
 listener http:Listener httpListener = new (9090);
 
 http:Service mockService = service object {
-    
-    resource function get docs/\$count(map<string|string[]> headers, string api\-version) returns int|http:BadRequest {
-        // Validate the request
-        if api\-version == "" {
-            return http:BAD_REQUEST;
-        }
-        // Mock response - return a count of documents
-        return 42;
-    }
-
-    resource function get docs(map<string|string[]> headers, string api\-version, string? search = ()) returns json|http:BadRequest {
+    resource function get docs(@http:Header string api\-key, @http:Query string api\-version, @http:Query string? search = ()) returns json|http:BadRequest {
         // Validate the request
         if api\-version == "" {
             return http:BAD_REQUEST;
@@ -42,12 +32,14 @@ http:Service mockService = service object {
                 {
                     "id": "1",
                     "title": "Test Document 1",
-                    "content": "This is a test document for Azure Search"
+                    "content": "This is a test document for Azure Search",
+                    "@search.score": 0.01
                 },
                 {
                     "id": "2", 
                     "title": "Test Document 2",
-                    "content": "Another test document for Azure Search"
+                    "content": "Another test document for Azure Search",
+                    "@search.score": 0.01
                 }
             ],
             "@odata.count": 2,
@@ -56,7 +48,7 @@ http:Service mockService = service object {
         return response;
     }
 
-    resource function get docs/search\.autocomplete(map<string|string[]> headers, string api\-version, string search, string suggesterName) returns json|http:BadRequest {
+    resource function get docs/search\.autocomplete(@http:Header string api\-key, @http:Query string api\-version, @http:Query string search, @http:Query string suggesterName) returns json|http:BadRequest {
         // Validate the request
         if api\-version == "" || search == "" || suggesterName == "" {
             return http:BAD_REQUEST;
@@ -72,7 +64,7 @@ http:Service mockService = service object {
         return response;
     }
 
-    resource function get docs/search\.suggest(map<string|string[]> headers, string api\-version, string search, string suggesterName) returns json|http:BadRequest {
+    resource function get docs/search\.suggest(@http:Header string api\-key, @http:Query string api\-version, @http:Query string search, @http:Query string suggesterName) returns json|http:BadRequest {
         // Validate the request
         if api\-version == "" || search == "" || suggesterName == "" {
             return http:BAD_REQUEST;

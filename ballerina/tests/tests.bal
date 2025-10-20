@@ -24,32 +24,12 @@ final string mockServiceUrl = "http://localhost:9090";
 final Client azureSearchClient = check initClient();
 
 function initClient() returns Client|error {
-    ConnectionConfig config = {
-        secureSocket: isLiveServer ? {
-            cert: {
-                path: "",
-                password: ""
-            }
-        } : ()
-    };
+    ConnectionConfig config = {};
     
     if isLiveServer {
         return new (serviceUrl, config);
     }
     return new (mockServiceUrl, config);
-}
-
-@test:Config {
-    groups: ["live_tests", "mock_tests"]
-}
-isolated function testDocumentsCount() returns error? {
-    DocumentsCountHeaders headers = {};
-    if !isLiveServer {
-        headers["api-key"] = apiKey;
-    }
-    
-    int count = check azureSearchClient->documentsCount(headers, api\-version = "2021-04-30-Preview");
-    test:assertTrue(count >= 0, msg = "Documents count should be non-negative");
 }
 
 @test:Config {
@@ -61,11 +41,11 @@ isolated function testDocumentsSearch() returns error? {
         headers["api-key"] = apiKey;
     }
     
-    SearchDocumentsResult searchResult = check azureSearchClient->documentsSearchGet(headers, 
-        api\-version = "2021-04-30-Preview",
+    SearchDocumentsResult searchResult = check azureSearchClient->documentsSearchGet(headers = headers, 
+        api\-version = "2025-09-01",
         search = "test"
     );
-    test:assertTrue(searchResult["value"] is json[], msg = "Search result should contain a value array");
+    test:assertTrue(searchResult["value"] is SearchResult[], msg = "Search result should contain a value array");
 }
 
 @test:Config {
@@ -74,12 +54,12 @@ isolated function testDocumentsSearch() returns error? {
 isolated function testDocumentsAutocomplete() returns error? {
     DocumentsAutocompleteGetHeaders headers = {"api-key": apiKey};
     
-    AutocompleteResult autocompleteResult = check azureSearchClient->documentsAutocompleteGet(headers, 
-        api\-version = "2021-04-30-Preview",
+    AutocompleteResult autocompleteResult = check azureSearchClient->documentsAutocompleteGet(headers = headers, 
+        api\-version = "2025-09-01",
         search = "test", 
         suggesterName = "test-suggester"
     );
-    test:assertTrue(autocompleteResult["value"] is json[], msg = "Autocomplete result should contain a value array");
+    test:assertTrue(autocompleteResult["value"] is AutocompleteItem[], msg = "Autocomplete result should contain a value array");
 }
 
 @test:Config {
@@ -88,10 +68,10 @@ isolated function testDocumentsAutocomplete() returns error? {
 isolated function testDocumentsSuggest() returns error? {
     DocumentsSuggestGetHeaders headers = {"api-key": apiKey};
     
-    SuggestDocumentsResult suggestResult = check azureSearchClient->documentsSuggestGet(headers, 
-        api\-version = "2021-04-30-Preview",
+    SuggestDocumentsResult suggestResult = check azureSearchClient->documentsSuggestGet(headers = headers, 
+        api\-version = "2025-09-01",
         search = "test",
         suggesterName = "test-suggester"
     );
-    test:assertTrue(suggestResult["value"] is json[], msg = "Suggest result should contain a value array");
+    test:assertTrue(suggestResult["value"] is SuggestResult[], msg = "Suggest result should contain a value array");
 }

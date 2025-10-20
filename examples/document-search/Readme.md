@@ -78,7 +78,7 @@ Create a `Config.toml` file with the following configuration:
 ```toml
 serviceUrl = "https://your-search-service.search.windows.net"
 apiKey = "your-api-key"
-indexName = "your-index-name"
+indexName = "my-test-index"
 ```
 
 ## Running the Example
@@ -92,7 +92,5 @@ bal run
 The example will demonstrate:
 - Searching for documents containing "technology"
 - Getting the total document count
-- Getting autocomplete suggestions for "tech"
-- Getting search suggestions for "prog"
 
 Each operation will display the results in a formatted manner showing how to work with the Azure AI Search Index connector.
